@@ -1,0 +1,40 @@
+import Foundation
+
+// Aircraft performance data
+struct AircraftPerformance {
+    var fuelConsumptionPerHour: Double // in gallons per hour
+    var cruiseSpeed: Double // in nautical miles per hour
+}
+
+// Flight log entry
+struct FlightLogEntry {
+    var departure: String
+    var destination: String
+    var distance: Double // in nautical miles
+    var flightTime: Double // in hours
+    var fuelUsed: Double // in gallons
+}
+
+// Function to calculate flight log entry
+func calculateFlightLogEntry(departure: String, destination: String, distance: Double, performance: AircraftPerformance) -> FlightLogEntry {
+    let flightTime = distance / performance.cruiseSpeed
+    let fuelUsed = flightTime * performance.fuelConsumptionPerHour
+    
+    return FlightLogEntry(departure: departure, destination: destination, distance: distance, flightTime: flightTime, fuelUsed: fuelUsed)
+}
+
+// Example usage
+let aircraftPerformance = AircraftPerformance(fuelConsumptionPerHour: 10.0, cruiseSpeed: 120.0)
+
+let departure = "JFK"
+let destination = "LAX"
+let distance = 2475.0 // Distance between JFK and LAX in nautical miles
+
+let flightLogEntry = calculateFlightLogEntry(departure: departure, destination: destination, distance: distance, performance: aircraftPerformance)
+
+print("Flight Log Entry:")
+print("Departure: \(flightLogEntry.departure)")
+print("Destination: \(flightLogEntry.destination)")
+print("Distance: \(flightLogEntry.distance) nautical miles")
+print("Flight Time: \(flightLogEntry.flightTime) hours")
+print("Fuel Used: \(flightLogEntry.fuelUsed) gallons")
